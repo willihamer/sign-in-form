@@ -1,11 +1,62 @@
 @import '../../styles/colors.scss';
 .formContainer {
-    border-top: 2px solid $mainGreen;
+    font-size: 1.2em;
+    border-top: 3px solid $mainGreen;
     padding: 1em 2em;
-    max-width: 500px;
+    max-width: 400px;
     width: 95%;
     background-color: #fff;
     font-family: 'Roboto', sans-serif;
-    text-align: center;
-    .title {}
+    align-content: center;
+    .title {
+        text-align: center;
+        font-size: 1.7em;
+        margin-bottom: 0;
+        font-weight: bold;
+    }
+    .formField {
+        width: 95%;
+        label {
+            display: block;
+            text-align: left;
+            font-weight: bold;
+            &.lbl {
+                margin-top: 1.2em;
+            }
+        }
+        .formText {
+            border: 2px solid #e1e1e1;
+            padding: 1rem 0;
+            flex: 1;
+            width: 100%;
+        }
+        .checkBox {
+            margin-top: 1.2em;
+            width: 1.2em;
+            height: 1.2em;
+            margin-right: 0.8em;
+            margin-bottom: 0!important;
+        }
+        .btn {
+            margin-top: 1.2em;
+            padding: 1rem;
+            width: 100%;
+            font-size: 1.4;
+            font-weight: 400;
+            border: none;
+            background-color: $mainGreen;
+            color: #fff;
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+    }
+    .relatedLinks {
+        text-align: center;
+        margin-top: 1.2em;
+        .link {
+            // text-decoration: none;
+            font-weight: bold;
+            color: #000;
+        }
+    }
 }
