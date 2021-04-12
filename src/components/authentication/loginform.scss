@@ -1,0 +1,11 @@
+@import '../../styles/colors.scss';
+.formContainer {
+    border-top: 2px solid $mainGreen;
+    padding: 1em 2em;
+    max-width: 500px;
+    width: 95%;
+    background-color: #fff;
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    .title {}
+}

@@ -1,0 +1,10 @@
+@import './styles/colors.scss';
+.App {
+    font-family: 'Roboto', sans-serif;
+    background-color: $mainGray;
+    height: 100vh;
+    min-height: 800px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
