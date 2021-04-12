@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { validateEmail, validatePassword } from '../../utils/validateForms';
 import './loginform.scss'
 
 export default function LoginForm() {
@@ -6,12 +7,56 @@ export default function LoginForm() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [remember, setRemember] = useState(false);
+    const [errors, setErrors] = useState([]);
 
-    const onChange = (e) => {
-
+    const onChangePassword = (e) => {
+        setPassword(e.target.value)
     }
 
-    const onSubmit = () => {
+    const onChangeCheckbox = () => {
+        setRemember(!remember);
+    }
+
+    const onSubmit = async (e) => {
+        e.preventDefault();
+
+        const arrayErros = [];
+        if (!validateEmail(email)) {
+            arrayErros.push('The email is not valid');
+        }
+        if (!validatePassword(password)) {
+            arrayErros.push('The password must have at least: length of 8, 1 uppercase, 1 lowercase and 1 number');
+        }
+
+        setErrors(arrayErros);
+
+        if (errors.length > 0) {
+            return;
+        }
+
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: email, password: password })
+        };
+
+        try {
+            await fetch('http://localhost:8000/api/login', requestOptions)
+                .then(
+                    // here we recieves maybe a token, and put it in some state or localStorage
+                    response => response.json()
+                )
+                .then(
+                    // here goes maybe some redirection to the content
+                );
+        } catch (error) {
+            // Here goes some logical to throw the error
+            console.log(error);
+        }
+
+        setEmail('');
+        setPassword('');
+        setRemember(false);
 
     }
 
@@ -26,7 +71,7 @@ export default function LoginForm() {
                         id="email"
                         name="email"
                         placeholder=""
-                        onChange={onChange}
+                        onChange={(e) => setEmail(e.target.value)}
                         value={email}
                         className="formText"
                     />
@@ -38,7 +83,7 @@ export default function LoginForm() {
                         id="password"
                         name="password"
                         placeholder=""
-                        onChange={onChange}
+                        onChange={onChangePassword}
                         value={password}
                         className="formText"
                     />
@@ -49,7 +94,7 @@ export default function LoginForm() {
                         id="remember"
                         name="remember"
                         checked={remember}
-                        onChange={onChange}
+                        onChange={onChangeCheckbox}
                         className="checkBox"
                     />
                     <span>Remember me?</span>
@@ -61,12 +106,27 @@ export default function LoginForm() {
                         value="Sign in"
                     />
                 </div>
-                <div className="relatedLinks">
-                    <a href="/#" className="link">Forgot your password?</a>
-                    <p>Don't have an account?<a href="/#" className="link">Sign up</a></p>
-                    <a href="/#" className="link">Resend email confirmation</a>
-                </div>
             </form>
+            <div className="relatedLinks">
+                <a href="/#" className="link">Forgot your password?</a>
+                <p>Don't have an account?<a href="/#" className="link">Sign up</a></p>
+                <a href="/#" className="link">Resend email confirmation</a>
+            </div>
+            {
+                errors.length > 0 && (
+                    <div className="errors">
+                        <ul>
+                            {errors.map((error, index) => (
+                                <li
+                                    key={index}
+                                >
+                                    {error}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                )
+            }
         </div>
     )
 }

@@ -2,7 +2,7 @@
 .formContainer {
     font-size: 1.2em;
     border-top: 3px solid $mainGreen;
-    padding: 1em 2em;
+    padding: 2em 2em;
     max-width: 400px;
     width: 95%;
     background-color: #fff;
@@ -11,7 +11,7 @@
     .title {
         text-align: center;
         font-size: 1.7em;
-        margin-bottom: 0;
+        margin: 0;
         font-weight: bold;
     }
     .formField {
@@ -58,5 +58,8 @@
             font-weight: bold;
             color: #000;
         }
+    }
+    .errors {
+        color: $mainRed;
     }
 }
