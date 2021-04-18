@@ -20,15 +20,15 @@ export default function LoginForm() {
     const onSubmit = async (e) => {
         e.preventDefault();
 
-        const arrayErros = [];
+        const arrayErrors = [];
         if (!validateEmail(email)) {
-            arrayErros.push('The email is not valid');
+            arrayErrors.push('The email is not valid');
         }
         if (!validatePassword(password)) {
-            arrayErros.push('The password must have at least: length of 8, 1 uppercase, 1 lowercase and 1 number');
+            arrayErrors.push('The password must have at least: length of 8, 1 uppercase, 1 lowercase and 1 number');
         }
 
-        setErrors(arrayErros);
+        setErrors(arrayErrors);
 
         if (errors.length > 0) {
             return;
@@ -43,7 +43,7 @@ export default function LoginForm() {
         try {
             await fetch('http://localhost:8000/api/login', requestOptions)
                 .then(
-                    // here we recieves maybe a token, and put it in some state or localStorage
+                    // here we receives maybe a token, and put it in some state or localStorage
                     response => response.json()
                 )
                 .then(
