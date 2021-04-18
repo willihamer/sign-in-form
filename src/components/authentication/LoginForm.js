@@ -97,6 +97,7 @@ export default function LoginForm() {
                         onChange={onChangeCheckbox}
                         className="checkBox"
                     />
+                    <span className="customCheck"></span>
                     <span>Remember me?</span>
                 </div>
                 <div className="formField">
